@@ -13,6 +13,22 @@ app.post('/notify', (req, res) => {
 
 app.listen(port, () => console.log(`server is up and running on port: ${port}`));
 
-const notify = ({title, message}, cb) => {
-  cb('some string')
+const notify = ({ title, message }, cb) => {
+
+    notifier.notify({
+title: title || "Unknown title",
+message: message || "Unknown message",
+icon: path.join(__dirname, "some.png"),
+sound: true,
+wait: true,
+reply: true,
+closeLabel: "Completed?",
+timeout: 15
+
+
+    }, (err, response, reply) => {
+        cb(reply)
+    })
+
+
 };
